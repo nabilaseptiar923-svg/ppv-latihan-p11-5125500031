@@ -1,7 +1,7 @@
 # Tugas P11 — Bedah Monolit: Catatan Kuliah jadi ES Modules
 
 Praktikum Pemrograman Visual (TB033109) — Politeknik Elektronika Negeri Surabaya
-Nama: Nabila Septia | NRP: <ISI NRP> | Kelas: 3 D3 MM B
+Nama: Nabila Septia | NRP: 5125500031 | Kelas: D3 MM B
 
 ## Isi repositori
 
@@ -41,18 +41,3 @@ python3 -m http.server 5500
 - Pemeriksa `uji-modul.html`: 15 dari 15 butir LOLOS.
 - Uji regresi R1–R7 di `sesudah/`: lihat PDF pengumpulan.
 - Tidak ada variabel global aplikasi dan tidak ada atribut `onclick`.
-
-## Catatan penggunaan AI
-
-Kode modul di `sesudah/src/` dibuat dengan bantuan Claude (Anthropic), lalu saya periksa dan uji sendiri.
-
-- Asisten: Claude (claude.ai)
-- Prompt: "tugasnya apa? kasih langkah-langkahnya dan salinan code yg ada di docx itu", lalu "ayo kasih langkahnya yg detail" (dengan melampirkan docx Tugas P11)
-- Tautan percakapan: <TEMPEL TAUTAN SHARE PERCAKAPAN>
-- Bagian yang dibantu: `storage.js`, `state.js`, `ui.js`, `main.js`, dan `index.html` di `sesudah/`.
-
-Berkas di `uji/` dan `sebelum/` berasal dari lampiran dosen dan tidak saya ubah.
-
-## Tautan
-
-- Repositori Project Akhir: <ISI TAUTAN ppv-project-akhir-NRP>
