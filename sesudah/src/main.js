@@ -1,39 +1,34 @@
-// main.js — titik masuk: menghubungkan event, state, dan tampilan.
-import * as state from './state.js';
-import { gambar } from './ui.js';
+// Contoh penerapan di main.js / app.js
+import { KartuCatatan, PesanKosong } from './komponen.js';
 
-let kataCari = '';
+function renderAplikasi(daftarCatatan) {
+  // Ambil kontainer penampung di HTML
+  const containerDisematkan = document.querySelector('#sematan'); // atau id kontainer Anda
+  const containerSemua = document.querySelector('#semua');       // atau id kontainer Anda
 
-function render() {
-  gambar(state.cari(kataCari));
-}
+  // Bersihkan isi kontainer lama
+  containerDisematkan.replaceChildren();
+  containerSemua.replaceChildren();
 
-document.getElementById('form').addEventListener('submit', (e) => {
-  e.preventDefault();
-  const judul = document.getElementById('judul').value.trim();
-  if (judul === '') return;
-  state.tambah(judul, document.getElementById('mk').value);
-  document.getElementById('judul').value = '';
-  render();
-});
+  // Pisahkan catatan yang disematkan dan yang biasa
+  const disematkanList = daftarCatatan.filter(c => c.disematkan);
+  const semuaList = daftarCatatan;
 
-document.getElementById('cari').addEventListener('input', (e) => {
-  kataCari = e.target.value;
-  render();
-});
-
-// delegasi: satu pendengar untuk semua tombol Sematkan/Lepas/Hapus
-document.querySelector('main').addEventListener('click', (e) => {
-  const tombol = e.target.closest('button[data-aksi]');
-  if (!tombol) return;
-  const id = Number(tombol.dataset.id);
-  if (tombol.dataset.aksi === 'semat') {
-    state.alihSemat(id);
-  } else if (tombol.dataset.aksi === 'hapus') {
-    if (!confirm('Hapus catatan ini?')) return;
-    state.hapus(id);
+  // 1. Render daftar Disematkan
+  if (disematkanList.length === 0) {
+    containerDisematkan.append(PesanKosong('Tidak ada catatan disematkan.'));
+  } else {
+    // Memakai KartuCatatan secara berulang menggunakan map & append
+    const elemenKartuDisematkan = disematkanList.map(catatan => KartuCatatan(catatan));
+    containerDisematkan.append(...elemenKartuDisematkan);
   }
-  render();
-});
 
-render();
+  // 2. Render daftar Semua Catatan
+  if (semuaList.length === 0) {
+    containerSemua.append(PesanKosong('Belum ada catatan sama sekali.'));
+  } else {
+    // Memakai KartuCatatan yang SAMA untuk daftar semua catatan (markup tidak ditulis ulang!)
+    const elemenKartuSemua = semuaList.map(catatan => KartuCatatan(catatan));
+    containerSemua.append(...elemenKartuSemua);
+  }
+}
